@@ -1,57 +1,73 @@
-import React, { useState } from 'react'
+import React, { useState } from "react";
 import { CiMenuBurger } from "react-icons/ci";
 import { IoMdClose } from "react-icons/io";
+import Logo from '../Images/logo.webp'
 
 export default function Navbar() {
 
   const navbar = [
-    {href:"/",name:"Gym benefits"},
-    {href:"/",name:"Gallery"},
-    {href:"/",name:"About"},
-    {href:"/",name:"Contact"}
-  ]
+    { href: "/", name: "Gym Benefits" },
+    { href: "/", name: "Gallery" },
+    { href: "/", name: "About" },
+    { href: "/", name: "Contact" }
+  ];
 
-  const [open, setOpen] = useState(false)
-
-  const toggleMenu = () => {
-    setOpen(!open)
-  }
+  const [open, setOpen] = useState(false);
 
   return (
-    <nav className='relative border-b-2 bg-zinc-900/80 text-amber-500 h-20 w-full px-20 flex text-2xl font-Montserrat tracking-wider justify-between items-center '>
+    <nav className="w-full border-b bg-black mb-20 relative text-white">
+      
+      <div className="max-w-7xl mx-auto flex justify-between items-center h-20 px-5 sm:px-8 lg:px-16">
 
-      <a href="#">Logo</a>
 
-      <ul className='hidden md:flex gap-10 hover:cursor-pointer'>
-        {
-          navbar.map((v,i)=>(
+        <a href="#" className="text-2xl font-bold">
+          <img src={Logo} className="w-25 h-25 absolute z-1 top-7 shadow-md shadow-blue-600 ring-2 ring-blue-600 rounded-full " />
+        </a>
+
+
+        <ul className="hidden md:flex gap-8 lg:gap-12 text-lg font-medium">
+          {navbar.map((v, i) => (
             <li key={i}>
-              <a href={v.href}>{v.name}</a>
+              <a
+                href={v.href}
+                className="hover:text-red-500 transition duration-300"
+              >
+                {v.name}
+              </a>
             </li>
-          ))
-        }
-      </ul>
+          ))}
+        </ul>
 
-      <div className='md:hidden' onClick={toggleMenu}>
-        {
-          open ? <IoMdClose /> : <CiMenuBurger />
-        }
+    
+        <div
+          className="md:hidden text-3xl cursor-pointer"
+          onClick={() => setOpen(!open)}
+        >
+          {open ? <IoMdClose /> : <CiMenuBurger />}
+        </div>
       </div>
 
-      {
-        open && (
-          <ul className='md:hidden bg-zinc-900/80 text-amber-500 w-full absolute top-20 left-0 flex flex-col gap-3 text-center'>
-            {
-              navbar.map((v,i)=>(
-                <li key={i}>
-                  <a href={v.href}>{v.name}</a>
-                </li>
-              ))
-            }
-          </ul>
-        )
-      }
+  
+      <div
+        className={`md:hidden bg-white border-t transition-all duration-300 ${
+          open ? "max-h-60 py-4" : "max-h-0 overflow-hidden"
+        }`}
+      >
+        <ul className="flex flex-col items-center gap-4 text-lg">
+          {navbar.map((v, i) => (
+            <li key={i}>
+              <a
+                href={v.href}
+                className="block hover:text-red-500 transition"
+                onClick={() => setOpen(false)}
+              >
+                {v.name}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
 
     </nav>
-  )
+  );
 }
