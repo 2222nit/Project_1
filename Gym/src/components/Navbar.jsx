@@ -15,7 +15,7 @@ export default function Navbar() {
   const [open, setOpen] = useState(false);
 
   return (
-    <nav className="w-full border-b bg-black mb-20 relative text-white">
+    <nav className="w-full border-b bg-black relative text-white">
       
       <div className="max-w-7xl mx-auto flex justify-between items-center h-20 px-5 sm:px-8 lg:px-16">
 
